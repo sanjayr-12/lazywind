@@ -1,0 +1,23 @@
+{
+  "name": "tail-up",
+  "version": "1.0.1",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "tail-up": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tailwindcss, lazy"
+  ],
+  "author": "Sanjay",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}
