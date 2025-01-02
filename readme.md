@@ -1,4 +1,4 @@
-# tail-up
+# lazywind
 
 A simple CLI tool to quickly set up Tailwind CSS in your project.
 
