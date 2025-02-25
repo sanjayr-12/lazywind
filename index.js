@@ -51,7 +51,6 @@ export default {
     fs.writeFileSync(`${path}/tailwind.config.js`, content);
     fs.writeFileSync(`${path}/src/index.css`, content2);
     console.log("all done");
-    
   } catch (error) {
     console.error(error);
   }
@@ -59,7 +58,7 @@ export default {
 
 await change();
 
-await tail("npm install -D tailwindcss postcss autoprefixer");
+await tail("npm install -D tailwindcss@3 postcss autoprefixer");
 
 await tail("npx tailwindcss init -p");
 
