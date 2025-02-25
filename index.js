@@ -1,65 +1,25 @@
 #!/usr/bin/env node
-import { exec } from "child_process";
-import fs from "node:fs";
 
-const path = process.cwd();
+import inquirer from "inquirer";
+import { V3 } from "./v3.js";
+import { V4 } from "./v4.js";
 
-function change() {
-  return new Promise((res, rej) => {
-    exec(`cd ${path}`, (err, stdout) => {
-      if (err) {
-        console.log(err);
-        rej(err);
-      } else {
-        console.log(stdout);
-        res(stdout);
-      }
-    });
-  });
+async function main() {
+  const answers = await inquirer.prompt([
+    {
+      type: "list",
+      name: "version",
+      message: "Select a version:",
+      choices: ["v3", "v4"],
+    },
+  ]);
+  return answers.version;
 }
 
-function tail(cmd) {
-  return new Promise((res, rej) => {
-    exec(cmd, (err, stdout) => {
-      if (err) {
-        console.log(err);
-        rej(err);
-      } else {
-        console.log(stdout);
-        res(stdout);
-      }
-    });
-  });
+const answer = await main();
+
+if (answer === "v3") {
+  await V3();
+} else {
+  await V4();
 }
-
-function template() {
-  const content = `/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}`;
-  const content2 = `@tailwind base;
-@tailwind components;
-@tailwind utilities;`;
-  try {
-    fs.writeFileSync(`${path}/tailwind.config.js`, content);
-    fs.writeFileSync(`${path}/src/index.css`, content2);
-    console.log("all done");
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-await change();
-
-await tail("npm install -D tailwindcss@3 postcss autoprefixer");
-
-await tail("npx tailwindcss init -p");
-
-template();
