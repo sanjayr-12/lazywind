@@ -45,8 +45,8 @@ export default {
   plugins: [],
 }`;
     const content2 = `@import "tailwindcss";`;
-      const extension = checkExists() ? "js" : "ts";
-          
+    const extension = checkExists() ? "js" : "ts";
+
     try {
       fs.writeFileSync(`${path}/vite.config.${extension}`, content);
       fs.writeFileSync(`${path}/src/index.css`, content2);
@@ -64,9 +64,7 @@ export default {
 };
 
 async function checkExists() {
-    if (fs.existsSync(`${path}/tailwind.config.js`)) {
-      console.log(true);
-      
+  if (fs.existsSync(`${path}/vite.config.js`)) {
     return true;
   } else {
     return false;
