@@ -1,9 +1,16 @@
 import { exec } from "child_process";
 import fs from "node:fs";
 
-const path = process.cwd();
+function checkExists(path) {
+  if (fs.existsSync(`${path}/vite.config.js`)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export const V4 = async () => {
+  const path = process.cwd();
   function change() {
     return new Promise((res, rej) => {
       exec(`cd ${path}`, (err, stdout) => {
@@ -45,7 +52,7 @@ export default {
   plugins: [],
 }`;
     const content2 = `@import "tailwindcss";`;
-    const extension = checkExists() ? "js" : "ts";
+    const extension = checkExists(path) ? "js" : "ts";
 
     try {
       fs.writeFileSync(`${path}/vite.config.${extension}`, content);
@@ -62,11 +69,3 @@ export default {
 
   template();
 };
-
-async function checkExists() {
-  if (fs.existsSync(`${path}/vite.config.js`)) {
-    return true;
-  } else {
-    return false;
-  }
-}
