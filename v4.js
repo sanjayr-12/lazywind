@@ -45,7 +45,7 @@ export default {
   plugins: [],
 }`;
     const content2 = `@import "tailwindcss";`;
-      const extension = checkExists() ? "ts" : "js";
+      const extension = checkExists() ? "js" : "ts";
           
     try {
       fs.writeFileSync(`${path}/vite.config.${extension}`, content);
