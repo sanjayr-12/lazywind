@@ -40,17 +40,13 @@ export const V4 = async () => {
   }
 
   function template() {
-    const content = `/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    const content = `import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}`;
+})`;
     const content2 = `@import "tailwindcss";`;
     const extension = checkExists(path) ? "js" : "ts";
 
